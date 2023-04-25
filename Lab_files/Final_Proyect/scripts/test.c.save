@@ -1,0 +1,27 @@
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <wiringPi.h>
+#include <signal.h>
+#include <unistd.h>
+#include <pthread.h>
+#include <string.h>
+int main(int argc, char const *argv[])
+{
+    wiringPiSetupPhys();
+    pinMode(13,INPUT);
+    pullUpDnControl(13,PUD_DOWN);
+    int x = 0;
+    int y;
+    printf("%i\n",digitalRead(13));
+    do {
+	y = digitalRead(13);
+	if(x != y){
+	    printf("%i\n",y);
+	    x = y;
+	
+	delay(1000);
+    }
+    while (1);
+    return 0;
+}
